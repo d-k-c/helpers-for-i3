@@ -1,0 +1,22 @@
+#!/usr/bin/env python
+#
+# Copyright 2018 Damien Riegel <damien.riegel@gmail.com>
+#
+# Licensed under the terms of the GNU GPL v3, or any later version.
+#
+# Open an instance of gnome-terminal in the same directory as the current
+# gnome-terminal instance.
+# Example: bindsym $mod+Shift+Return exec i3-gnome-terminal-same-dir
+
+import os
+import i3ipc
+
+i3 = i3ipc.Connection()
+focused = i3.get_tree().find_focused()
+
+if focused.app_id != 'gnome-terminal-server':
+    cmd = i3.command("exec $term")
+else:
+    cwd = focused.name.split(":")[-1]
+    expanded_cwd = os.path.expanduser(cwd)
+    cmd = i3.command(f"exec $term --working-directory={expanded_cwd}")

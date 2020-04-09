@@ -56,6 +56,28 @@ mode "resize" {
 }
 ----
 
+=== i3-gnome-terminal-same-dir
+
+For gnome-terminal user, this script allows to spawn a new instance of the
+terminal with its working directory set to the same value as the current one.
+
+It expects the title of the window to be of the form:
+
+----
+	...:/path/to/current/directory
+----
+
+So it will fail if there is a semicolon somewhere in the path. This is
+considered enough of a edge case to not deemed worthy of fixing.
+
+Usage: i3-gnome-terminal-same-dir
+
+Binding example for your i3 config:
+
+----
+bindsym $mod+Shift+Return exec i3-gnome-terminal-same-dir
+----
+
 == Copyright
 
 Copyright (C) 2016 Vivien Didelot <vivien@didelot.org>
